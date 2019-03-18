@@ -26,7 +26,7 @@ class Modules {
     public function skin_registered($widget) {
         // We check if the Elementor plugin has been installed / activated.
         if(defined('ELEMENTOR_PATH') && class_exists('ElementorPro\Modules\Posts\Skins\Skin_Cards')){
-            $path = ECW_PLUGIN_PLUGIN_PATH.'modules/*/skins'; 
+            $path = ECW_PLUGIN_PLUGIN_PATH.'modules/*/skins';
             $skin_name = glob($path.'/skin-*.php');
             foreach ( $skin_name as $skin ) {
                 require_once $skin;
@@ -37,7 +37,7 @@ class Modules {
     public function widgets_registered() {
         // We check if the Elementor plugin has been installed / activated.
         if( defined('ELEMENTOR_PATH') && class_exists('Elementor\Widget_Base') ){
-            $path = ECW_PLUGIN_PLUGIN_PATH.'modules/*/widgets'; 
+            $path = ECW_PLUGIN_PLUGIN_PATH.'modules/*/widgets';
             $module_name = glob($path.'/widget-*.php');
             foreach ( $module_name as $widget ) {
                 require_once( $widget );
@@ -46,4 +46,3 @@ class Modules {
     }
 }
 Modules::get_instance()->init();
-
