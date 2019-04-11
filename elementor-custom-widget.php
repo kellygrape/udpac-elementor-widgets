@@ -70,5 +70,4 @@ add_action( 'elementor/query/show_date_filter', function( $query ) {
     $query->set('order', 'ASC');
 	$query->set( 'meta_query', $meta_query );
 
-    d($query);
 } );
