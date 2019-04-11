@@ -118,7 +118,6 @@ Class Elementor_Show_Dates_Tag extends \Elementor\Core\DynamicTags\Tag {
         $opendate = DateTime::createFromFormat('Ymd', get_field('opening_night'));
         $closedate = DateTime::createFromFormat('Ymd', get_field('closing_night'));
 
-		var_dump(get_field('closing_night'));
         if ($list_type === 'date-range') {
             echo '<span class="datespan">';
 

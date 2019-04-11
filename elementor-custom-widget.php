@@ -45,22 +45,30 @@ add_action( 'elementor/dynamic_tags/register_tags', function( $dynamic_tags ) {
 
 // set up the query filter for dates - allow to not show productions that are past.
 // Showing post with meta key filter in Portfolio Widget
-add_action( 'elementor_pro/posts/query/show_date_filter', function( $query ) {
+add_action( 'elementor/query/show_date_filter', function( $query ) {
 	// Get current meta Query
+
 	$meta_query = $query->get( 'meta_query' );
-    d($meta_query);
 	// Append our meta query
     if($meta_query == "") {
         $meta_query = array();
         $query->set( 'meta_query' , $meta_query);
     }
-    $meta_query[] = array(
+    $meta_query['relation'] = 'AND';
+    $meta_query['order_by_opening'] = array(
+        'key'     => 'opening_night',
+        'type'    => 'NUMERIC',
+        'compare' => 'EXISTS'
+    );
+    $meta_query['before_closes'] = array(
         'key' => 'closing_night',
         'value' => date('Ymd'),
         'compare' => '>=',
         'type'    => 'NUMERIC'
     );
-    $query->set('orderby', 'meta_value_num');
+    $query->set('orderby', 'order_by_opening');
     $query->set('order', 'ASC');
 	$query->set( 'meta_query', $meta_query );
+
+    d($query);
 } );

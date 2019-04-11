@@ -82,21 +82,23 @@ Class Elementor_Show_Sponsor_Tag extends \Elementor\Core\DynamicTags\Tag {
 	* @return void
 	*/
 	public function render() {
+
         if(have_rows('show_sponsors')):
 			echo '<h3>Show Sponsors</h3>';
 			echo '<ul>';
 		    while ( have_rows('show_sponsors') ) : the_row();
-				if(has_sub_field('sponsor_logo')) {
+				$image = get_sub_field('sponsor_logo');
+				$link = get_sub_field('sponsor_link');
+				if(!empty($image)) {
 					echo '<li>';
-					$image = get_sub_field('sponsor_logo');
-					if(has_sub_field('sponsor_link')): echo '<a href="'.get_sub_field('sponsor_link').'">';
+					if(!empty($link)): echo '<a href="'.$link.'">';
 					endif;
 
 					if( !empty($image) ): echo '<img src="'.$image['url'].'" alt="'.get_sub_field('sponsor_name').'" />';
 					else: echo get_sub_field('sponsor_name');
 					endif;
 
-					if(has_sub_field('sponsor_link')): echo '</a>';
+					if(!empty($link)): echo '</a>';
 					endif;
 					echo '</li>';
 				}
